@@ -23,7 +23,7 @@ output_dir: saves/qwen/lora/sft
 logging_steps: 10
 save_steps: 500
 plot_loss: true
-overwrite_output_dir: true
+overwrite_output_dir: trueS
 
 ### train
 per_device_train_batch_size: 1
