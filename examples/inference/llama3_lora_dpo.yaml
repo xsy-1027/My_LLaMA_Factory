@@ -1,0 +1,6 @@
+#model_name_or_path: meta-llama/Meta-Llama-3-8B-Instruct
+#adapter_name_or_path: saves/llama3-8b/lora/sft
+model_name_or_path: models/qwen_lora_sft
+adapter_name_or_path: saves/qwen/lora/dpo
+template: qwen
+finetuning_type: lora

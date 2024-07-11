@@ -249,7 +249,7 @@
     "hf_hub_url": "hfl/ruozhiba_gpt4_turbo"
   },
   "neo_sft": {
-    "hf_hub_url": "m-a-p/neo_sft_phase2",
+    "file_name": "neo_sft_phase2.json",
     "formatting": "sharegpt"
   },
   "magpie_pro_300k": {
@@ -396,7 +396,7 @@
     }
   },
   "dpo_mix_zh": {
-    "hf_hub_url": "hiyouga/DPO-En-Zh-20k",
+    "file_name": "DPO-En-Zh-20k.json",
     "subset": "zh",
     "ranking": true,
     "formatting": "sharegpt",
