@@ -1,4 +1,9 @@
 {
+  "my_car_train": {
+    "file_name": "car_conversations_test.json",
+    "formatting": "sharegpt"
+  },
+
   "identity": {
     "file_name": "identity.json"
   },
