@@ -4,12 +4,13 @@ import os
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 # 加载模型和分词器
-model_path = '../models/car/qwen2_lora_sft'
+# model_path = '../models/car/qwen2_lora_sft'
+model_path = '../models/car/qwen2_full_sft'
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForCausalLM.from_pretrained(model_path)
 
 # 问题
-question = "一汽奥迪 奥迪A3 2023款 改款 Sportback 35 TFSI 豪华致雅型 的官方指导价是多少"
+question = "一汽奥迪 奥迪A4L 2023款 40 TFSI 时尚动感型 的官方指导价是多少？"
 # 编码输入
 inputs = tokenizer(question, return_tensors="pt")
 
