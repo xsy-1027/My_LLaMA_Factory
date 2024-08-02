@@ -1,0 +1,3 @@
+model_name_or_path: saves/car/badam/sft
+template: qwen
+finetuning_type: full

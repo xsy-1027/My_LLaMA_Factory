@@ -1,7 +1,12 @@
 {
-  "my_car_train": {
-    "file_name": "car_conversations_test.json",
+  "my_car_prices": {
+    "file_name": "car_price_talk_less.json",
     "formatting": "sharegpt"
+  },
+
+  "my_car_params": {
+  "file_name": "car_params_talk_less.json",
+  "formatting": "sharegpt"
   },
 
   "identity": {
