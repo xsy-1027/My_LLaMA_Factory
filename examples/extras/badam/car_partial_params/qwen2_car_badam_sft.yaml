@@ -13,7 +13,7 @@ badam_switch_interval: 50
 badam_verbose: 2
 
 ### dataset
-dataset: my_car_params
+dataset:  my_car_partial_params
 template: llama3
 cutoff_len: 1024
 max_samples: 1000

@@ -1,10 +1,21 @@
 {
+
   "my_car_prices": {
     "file_name": "car_price_talk_less.json",
     "formatting": "sharegpt"
   },
 
-  "my_car_params": {
+  "my_car_partial_params": {
+    "file_name": "car_partial_params_talk.json",
+    "formatting": "sharegpt"
+  },
+
+  "my_car_all_params": {
+  "file_name": "car_all_params_talk.json",
+  "formatting": "sharegpt"
+  },
+
+  "my_car_basic_params": {
   "file_name": "car_params_talk_less.json",
   "formatting": "sharegpt"
   },
