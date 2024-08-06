@@ -2,7 +2,6 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 import time
 
-
 model_id = '../saves/car_sft/badam'
 
 tokenizer = AutoTokenizer.from_pretrained(model_id)
@@ -26,47 +25,37 @@ prompt = """
 注意，不要回答与问题无关的内容，不要重复回答!!
 """
 
-messages = [
-    {"role": "system", "content": prompt},
-    # {"role": "user", "content": "别克系列的君越2023款艾维亚版 多少钱啊？"},
-    {"role": "user", "content": "奥迪 奥迪Q5L 2024款 40 TFSI 豪华致雅型 的基本参数是什么"},
-    # {"role": "user", "content": "奥迪系列的官方指导价 最低是多少？"},
-    # {"role": "user", "content": "奥迪系列的价格范围是多少？"},
-    # {"role": "user", "content": "奔腾B302016款长*宽*高是多少？"},
-    # {"role": "user", "content": "你好，今天天气怎么样？"},
+questions = [
+    "别克系列的君越2023款艾维亚版 多少钱啊？",
+    "奥迪 奥迪Q5L 2024款 40 TFSI 豪华致雅型 的基本参数是什么",
+    "奥迪系列的官方指导价 最低是多少？",
+    "奥迪系列的价格范围是多少？",
+    "奔腾B302016款长*宽*高是多少？",
+    "你好，今天天气怎么样？"
 ]
 
-start_prefill = time.time()
+for question in questions:
+    messages = [
+        {"role": "system", "content": prompt},
+        {"role": "user", "content": question}
+    ]
 
-input_ids = tokenizer.apply_chat_template(
-    messages, add_generation_prompt=True, return_tensors="pt"
-).to(model.device)
+    input_ids = tokenizer.apply_chat_template(
+        messages, add_generation_prompt=True, return_tensors="pt"
+    ).to(model.device)
 
-end_prefill = time.time()
-prefill_duration = end_prefill - start_prefill
+    outputs = model.generate(
+        input_ids,
+        max_new_tokens=2048,
+        do_sample=True,
+        temperature=0.6,
+        top_p=0.9,
+    )
 
-start_decoding = time.time()
+    response = outputs[0][input_ids.shape[-1]:]
+    answer = tokenizer.decode(response, skip_special_tokens=True)
 
-outputs = model.generate(
-    input_ids,
-    max_new_tokens=2048,
-    do_sample=True,
-    temperature=0.6,
-    top_p=0.9,
-)
-
-end_decoding = time.time()
-total_decoding_duration = end_decoding - start_decoding
-
-num_generated_tokens = outputs.shape[1] - input_ids.shape[1]
-avg_decoding_duration_per_token = total_decoding_duration / num_generated_tokens
-
-response = outputs[0][input_ids.shape[-1]:]
-answer = tokenizer.decode(response, skip_special_tokens=True)
-
-print(f"Prefilling 时长: {prefill_duration:.4f} 秒")
-print(f"Decoding 总时长: {total_decoding_duration:.4f} 秒")
-print(f"每个 token 的 Decoding 时长: {avg_decoding_duration_per_token:.4f} 秒")
-print("--------------------------------")
-print("问题：", messages[0]["content"])
-print(f"回答：{answer}")
+    print("--------------------------------")
+    print("问题：", question)
+    print(f"回答：{answer}")
+    time.sleep(1)  # 添加短暂的延迟以避免过快的连续请求
